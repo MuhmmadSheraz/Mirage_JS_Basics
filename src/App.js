@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch("/api/books")
+      .then((e) => e.json())
+      .then((x) => setData(x));
+  }, []);
+  const addbook = () => {
+    const bookName = prompt("Enter Book Name");
+    const AuthorName = prompt("Enter Author Name");
+    console.log(bookName, AuthorName);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App-header">
+        <h3>Mirage JS</h3>
+
+        <ul>
+          {data &&
+            data.map((book, index) => {
+              return (
+                <li key={index}>
+                  {book.title} ******* {book.author}{" "}
+                </li>
+              );
+            })}
+        </ul>
+        <button onClick={addbook}>Add Book </button>
+      </div>
     </div>
   );
 }
