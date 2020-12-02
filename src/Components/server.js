@@ -8,8 +8,8 @@ export function serverAPI() {
         return serverData;
       });
       this.post("/add", (schema, req) => {
-        console.log(JSON.parse(req.requestBody))
-        return JSON.parse(req.requestBody)
+        serverData.push(JSON.parse(req.requestBody));
+        return serverData;
       });
     },
   });
