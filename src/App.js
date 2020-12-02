@@ -9,10 +9,22 @@ function App() {
       .then((x) => setData(x));
   }, []);
   const addbook = () => {
-    const bookName = prompt("Enter Book Name");
-    const AuthorName = prompt("Enter Author Name");
+    const bookName = prompt("Enter Book Name", 5665);
+    const AuthorName = prompt("Enter Author Name", "gjkl");
     console.log(bookName, AuthorName);
+    fetch("/api/add", {
+      method: "POST",
+      body: JSON.stringify({
+        title: bookName,
+        author: AuthorName,
+      }),
+    }).then(res=>{
+      return res.json()
+    }).then(x=>{
+      console.log(x)
+    });
   };
+
   return (
     <div className="App">
       <div className="App-header">
